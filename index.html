@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja" dir="ltr" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<meta charset="utf-8">
+<title>Pg - Password generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="パスワードをお手軽で大量に生成できるWebツール">
+<meta name="author" content="Daisuke Sakata">
+
+<meta property="og:title" content="Pg" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://pg.websegment.net/" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:image" content="http://pg.websegment.net/ico/og.png" />
+<meta property="og:site_name" content="Pg" />
+<meta property="og:description" content="パスワードをお手軽で大量に生成できるWebツール" />
+<meta property="fb:app_id" content="351644658207600" />
+<meta property="fb:admins" content="1720621564" />
+
+<!-- Le styles -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/jslider.css" rel="stylesheet">
+<link href="css/jslider.round.css" rel="stylesheet">
+<link href="css/jslider.round.plastic.css" rel="stylesheet">
+<style type="text/css">
+*{
+	font-family: "Lucida Grande",Helvetica,Arial,sans-serif;
+}
+body{
+	padding-top: 60px;
+	padding-bottom: 40px;
+	background-image: url('img/bg.gif');
+	background-repeat: repeat;
+	background-position: top left;
+	background-attachment: scroll;
+}
+#passwd{
+	font-family: "Courier New",monospace;
+}
+.tabbable-bg{
+	background-color: #fff;
+}
+.nav{
+	margin-bottom:0px !important;
+}
+.nav-tabs{
+	border-bottom:0 !important;
+}
+.tab-content{
+	padding:10px;
+	border-color: #ddd;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 0px 4px 4px 4px;
+}
+</style>
+<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<script type="text/javascript" src="js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="js/jshashtable-2.1_src.js"></script>
+<script type="text/javascript" src="js/jquery.numberformatter-1.2.3.js"></script>
+<script type="text/javascript" src="js/tmpl.js"></script>
+<script type="text/javascript" src="js/jquery.dependClass-0.1.js"></script>
+<script type="text/javascript" src="js/draggable-0.1.js"></script>
+<script type="text/javascript" src="js/jquery.slider.js"></script>
+<script type="text/javascript" src="js/bootstrap-tab.js"></script>
+<script type="text/javascript" src="js/bootstrap-button.js"></script>
+<script type="text/javascript" src="js/passwd.js"></script>
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/114icon.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/72icon.png">
+<link rel="apple-touch-icon-precomposed" href="ico/57icon.png">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30634114-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=351644658207600";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="/">Pg</a>
+    </div>
+  </div><!--/.navbar-inner-->
+</div><!--/.navbar-->
+
+<div class="container">
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="head-page">
+<h1>Pg</h1>
+<p>パスワードをお手軽で大量に生成できるWebツール</p>
+</div>
+
+<!-- Example row of columns -->
+<div class="row">
+<div class="tabbable span12">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#1" data-toggle="tab">数字</a></li>
+    <li><a href="#2" data-toggle="tab">英字</a></li>
+    <li><a href="#3" data-toggle="tab">記号</a></li>
+  </ul>
+  <div class="tab-content tabbable-bg">
+    <div class="tab-pane active" id="1">
+      <p id="digit-box">&nbsp;</p>
+    </div>
+    <div class="tab-pane" id="2">
+      <p id="lang-box">&nbsp;</p>
+    </div>
+    <div class="tab-pane" id="3">
+      <p id="mark-box">&nbsp;</p>
+    </div>
+  </div>
+</div>
+<div><!--/.tabbable-->
+</div>
+
+<div class="span12">
+<p>&nbsp;</p>
+</div>
+
+<div class="well span4">
+<span class="help-inline">接頭辞：</span><input type="text" name="before" id="before" class="span1" />
+      <span class="help-inline">生成数：</span><input type="text" name="count" id="count" value="1" class="span1" pattern="[0-9]*" />
+<hr />
+<div class="btn-inline btn-group" data-toggle="buttons-checkbox">
+<button class="btn digit" data-toggle="button"><strong>数字</strong></button>
+<button class="btn str" data-toggle="button"><strong>英字</strong></button>
+<button class="btn mark" data-toggle="button"><strong>記号</strong></button>
+</div>
+<hr />
+<input id="sslider" type="slider" value="8" />
+<p><br />文字の長さを調整。</p>
+</div><!--/.span4-->
+
+<div class="span6">
+<p>テキストファイルやExcelに貼りつけてご利用ください</p>
+<p><textarea id="passwd" readonly="readonly" rows="10" class="span6"></textarea></p>
+</div>
+
+<div class="span12">
+<iframe src="//www.facebook.com/plugins/like.php?locale=ja_JP&amp;href=http%3A%2F%2Fpg.websegment.net%2F&amp;send=false&amp;layout=button_count&amp;width=100%&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=lucida+grande&amp;height=21&amp;appId=351644658207600" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%; height:21px;" allowTransparency="true"></iframe><br />
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ja">ツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<hr />
+</div>
+</div><!--/.row-->
+<footer>
+<p>&copy;2012 <a href="http://websegment.net/" target="_blank">websegment.net</a> All Rights Reserved.</p>
+</footer>
+</div> <!-- /container -->
+</body>
+</html>
